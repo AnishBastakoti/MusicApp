@@ -3,8 +3,21 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "express": "^4.18.2",
     "parcel-bundler": "^1.6.1"
   },
   "scripts": {},
-  "devDependencies": {}
+  "description": "",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/AnishBastakoti/MusicApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnishBastakoti/MusicApp/issues"
+  },
+  "homepage": "https://github.com/AnishBastakoti/MusicApp#readme"
 }

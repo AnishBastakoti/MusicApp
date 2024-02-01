@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>MUSIC APP</title>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Browse</a></li>
+            <li><a href="#">Radio</a></li>
+            <li><a href="#">Playlists</a></li>
+            <li><a href="#">Genres</a></li>
+            <li><a href="#" onclick="openLoginModal()">Login</a></li>
+             <li><a href="#" onclick="openRegisterModal()">Register</a></li>
+        </ul>
+    </nav>
+    <!-- Registration Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeRegisterModal()">&times;</span>
+            <h2>Register</h2>
+            <form action="/register" method="post">
+                <label for="username">Username:</label>
+                <input type="text" name="username" required>
+                <label for="email">Email:</label>
+                <input type="email" name="email" required>
+                <label for="password">Password:</label>
+                <input type="password" name="password" required>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>Login</h2>
+            <form action="/login" method="post" onsubmit="return validateLogin()">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="loginEmail" required>
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="loginPassword" required>
+                <button type="submit" value="Login">Login</button>
+                <p id="loginError" class="error-message"></p>
+            </form>
+        </div>
+    </div>
+
+
+    <section class="hero">
+        <h2>Discover and Stream</h2>
+        <p>The Ultimate Music Experience</p>
+        <div class="buttons">
+            <button>Get Started</button>
+            <button>Learn More →</button>
+        </div>
+    </section>
+
+  <section class="features">
+      <h2>FEATURES</h2>
+      <p>Unleash the Power of Music</p>
+      <p>Discover a world of endless possibilities with our cutting-edge features</p>
+
+      <div class="feature-box">
+          <h3>Personalized Recommendations</h3>
+          <p>Discover new music based on your preferences</p>
+      </div>
+
+      <div class="feature-box">
+          <h3>Curated Playlists</h3>
+          <p>Enjoy expertly crafted playlists for every mood and occasion</p>
+      </div>
+
+      <div class="feature-box">
+          <h3>Offline Listening</h3>
+          <p>Download your favorite songs and listen to them without an internet connection</p>
+      </div>
+
+      <div class="feature-box">
+          <h3>High-Quality Audio</h3>
+          <p>Experience music in stunning clarity with high-quality audio streaming</p>
+      </div>
+  </section>
+
+  <section class="pricing">
+      <h2>Pricing</h2>
+      <table>
+          <thead>
+              <tr>
+                  <th>Plan</th>
+                  <th>Price</th>
+                  <th>Features</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>Basic</td>
+                  <td>$9.99/month</td>
+                  <td>Standard Audio Quality</td>
+              </tr>
+              <tr>
+                  <td>Pro</td>
+                  <td>$14.99/month</td>
+                  <td>High-Quality Audio, Offline Listening</td>
+              </tr>
+              <tr>
+                  <td>Premium</td>
+                  <td>$19.99/month</td>
+                  <td>Personalized Recommendations, Curated Playlists, High-Quality Audio, Offline Listening</td>
+              </tr>
+          </tbody>
+      </table>
+  </section>
+  <section class="faq">
+          <h2>FAQ</h2>
+          <p>Common questions</p>
+          <p>Here are some of the most common questions that we get.</p>
+
+          <ul>
+              <li><strong>What is Musicapp?</strong><br>
+                  Musicapp is a streaming service that allows you to access millions of songs, curated playlists, and exclusive content.
+              </li>
+              <li><strong>How much does MusicApp cost?</strong><br>
+                  MusicApp offers different subscription plans. The individual plan costs $9.99 per month, while the family plan costs $14.99 per month and allows up to six people to share the subscription.
+              </li>
+              <li><strong>Can I listen to MusicApp offline?</strong><br>
+                  Yes, with MusicApp, you can download songs, albums, and playlists to your device for offline listening. This feature is available for both iOS and Android devices.
+              </li>
+              <li><strong>Can I access MusicApp on multiple devices?</strong><br>
+                  Absolutely! You can access MusicApp on multiple devices, including iPhone, iPad, Mac, PC, Apple Watch, and Android devices. Your library and preferences will sync across all your devices.
+              </li>
+              <li><strong>Is there a free trial available for MusicApp?</strong><br>
+                  Yes, MusicApp offers a free trial period of three months for new subscribers. During this trial period, you can enjoy all the features of the service without any charges.
+              </li>
+          </ul>
+      </section>
+
+      <footer>
+          <p>© 2023 myCompany, All Rights Reserved.</p>
+      </footer>
+      <script>
+         // Open the registration modal
+         function openRegisterModal() {
+             document.getElementById('registerModal').style.display = 'block';
+         }
+
+         // Close the registration modal
+         function closeRegisterModal() {
+             document.getElementById('registerModal').style.display = 'none';
+         }
+
+         // Open the login modal
+             function openLoginModal() {
+                 document.getElementById('loginModal').style.display = 'block';
+             }
+
+             // Close the login modal
+             function closeLoginModal() {
+                 document.getElementById('loginModal').style.display = 'none';
+                 // Clear the error message when closing the modal
+                 document.getElementById('loginError').innerText = '';
+             }
+
+             // Validate login form
+             function validateLogin() {
+                 const email = document.getElementById('loginEmail').value;
+                 const password = document.getElementById('loginPassword').value;
+
+                 // You can add additional client-side validation if needed
+
+                 if (!email || !password) {
+                     document.getElementById('loginError').innerText = 'Please fill in all fields.';
+                     return false; // Prevent form submission
+                 }
+
+                 return true; // Allow form submission
+             }
+     </script>
+
+</body>
+
+</html>
