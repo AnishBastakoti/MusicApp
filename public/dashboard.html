@@ -4,16 +4,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Dashboard - MUSIC APP</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="{{ url_for('static', filename='search.js') }}"></script>
+    <script src="{{ url_for('static', filename='dropdown.js') }}"></script>
+    <title>Dashboard-MUSIC APP</title>
 </head>
 
 <body>
-    <div class="dashboard-container">
-        <h1>Hurray! Enjoy Your Music</h1>
-        <p>Welcome to the Music App Dashboard. You are now logged in.</p>
-        <p>Explore and enjoy a world of music at your fingertips.</p>
+  <nav>
+      <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Browse</a></li>
+          <li><a href="#">Radio</a></li>
+          <li><a href="#">Playlists</a></li>
+          <li><a href="#">Genres</a></li>
+          <li>
+              <form action="{{ url_for('search') }}" method="get">
+                  <input type="text" name="query" id="searchInput" placeholder="Search songs">
+                  <button type="submit" id="searchButton">Search</button>
+              </form>
+            </li>
+            {% if session['user'] %}
+                <li class="dropdown">
+                    <div class="dropbtn" onclick="toggleDropdown()">{{ session['user']['username'] }}</div>
+                    <div class="dropdown-content" id="dropdownContent">
+                        <p>Name: {{ session['user']['username'] }}</p>
+                        <p>Email: {{ session['user']['email'] }}</p>
+                        <p>No of songs uploaded: {{ user_songs|length if user_songs else 0 }}</p>
+                        <a href="{{ url_for('logout') }}">Logout</a>
+                        <button onclick="closeDropdown()">Close</button>
+                    </div>
+                </li>
+            {% else %}
+
+          {% endif %}
+      </ul>
+  </nav>
+  <div id="searchResults"></div>
+
+    <div class="container">
+        <h2>Your Songs</h2>
+        {% if user_songs %}
+            <ul>
+                {% for song in user_songs %}
+                    <li>
+                        <p>{{ song.title }} - {{ song.artist }}</p>
+                        <audio controls>
+                            <source src="{{ url_for('static', filename='uploads/' + song.filename) }}" type="audio/mp3">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <button onclick="editSong('{{ song.id }}')">Edit</button>
+                        <button onclick="deleteSong('{{ song.id }}')">Delete</button>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No songs available.</p>
+        {% endif %}
+
+        <h2>Upload a Song</h2>
+        <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+            <label for="title">Title:</label>
+            <input type="text" name="title" required>
+            <label for="artist">Artist:</label>
+            <input type="text" name="artist" required>
+            <label for="file">Choose a file:</label>
+            <input type="file" name="file" accept=".mp3" required>
+            <button type="submit">Upload</button>
+        </form>
     </div>
 </body>
+<footer>
+    <p>© 2023 myCompany, All Rights Reserved.</p>
+</footer>
 
 </html>
